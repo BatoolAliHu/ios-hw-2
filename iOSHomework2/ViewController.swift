@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var membersNamesArray  : [String] = [""]
+    var membersNamesArray  : [String] = []
+    
     
     var convertToLetter = true
     @IBOutlet weak var secretSocietyNameLabel: UILabel!
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
         
         // MARK: -   1️⃣ تحت الخط membersNamesArray إلي المصفوفه memberقم بإضافة المتغير
         
-        
+             membersNamesArray.append(member)
         
         // MARK: -   النهاية
         
@@ -34,8 +35,7 @@ class ViewController: UIViewController {
         
         // MARK: -  4️⃣ functionCall داخل المتغير  secretNameLetter قم باستدعاء الدالة
         
-        var functionCall = ""
-        
+        let functionCall = encryptwith(emoji: false, array: membersNamesArray)
         
         // MARK: -   النهاية
         
@@ -52,12 +52,11 @@ class ViewController: UIViewController {
         
         // MARK: -  5️⃣ functionCall داخل المتغير  secretNameEmoji قم باستدعاء الدالة
         
-        var functionCall = ""
-        
+        var functionCall = encryptwith(emoji: true, array: membersNamesArray)
         // MARK: -   النهاية
-        
+    
         secretSocietyNameLabel.text =  functionCall
-        
+    
         
     }
     
@@ -65,20 +64,57 @@ class ViewController: UIViewController {
     
     
     // MARK: - 2️⃣ تحت هذا الخط secretNameLetter قم بكتابة الداله
+    func secretNameLetter(membernamearray: [String])-> String{
+        var firstletterarray: [String] = []
+        for membername in membersNamesArray {
+            firstletterarray.append(String (membername.prefix(1)))
+            print(firstletterarray.joined())
+        }
+        membersNamesArray.removeAll()
+        
+        return firstletterarray.joined().uppercased()
+  
+    }
     
+        
+        // MARK: -   النهاية
+        
+        
+        
+        
+        
+        // MARK: - 3️⃣ تحت هذا الخط secretNameEmoji قم بكتابة الداله
+        
+        func secretNameEmoji(membernamearray: [String]) -> String {
+            let emojiDicionaryEnglish = [ "A": "🧲", "B": "💣", "C": "🧨", "D": "📿", "E": "🔮", "F": "🧬", "G": "🦠", "H": "💊", "I": "⚖️", "J": "🧽", "K": "🎁", "L": "🎎", "M": "⛱", "N": "🎠", "O": "🎡", "P": "⛽️", "Q": "🚀", "R": "🚘", "S": "🗿", "T": "🚜", "U": "🥁", "V": "🎨", "W": "🩰", "X": "🎭","Y": "🎸", "Z": "🎮" ]
+        var emojiletterarray: [String] = []
+        for i in membersNamesArray {
+            let firstLetter = String(i.prefix(1))
+            for (letter,emoji) in emojiDicionaryEnglish {
+                if letter == firstLetter{
+                    emojiletterarray.append(emoji)
+                }
+               
+            }
+        }
+            membersNamesArray.removeAll()
+            return emojiletterarray.joined()
+    }
+        
     
-    // MARK: -   النهاية
+        // MARK: -   النهاية
+        
+    func encryptwith(emoji: Bool, array: [String]) -> String{
+        if emoji{
+            return secretNameEmoji(membernamearray: array)
+        }
+        else{
+            return secretNameLetter(membernamearray: array)
+        }
+      
+    }
+        
     
-    
-    
-    
-    
-    // MARK: - 3️⃣ تحت هذا الخط secretNameEmoji قم بكتابة الداله
-    
-    
-    // MARK: -   النهاية
-    
-    
-    
+
 }
 
